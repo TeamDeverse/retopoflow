@@ -187,12 +187,13 @@ class TextBox(object):
             for i,wrd in enumerate(words):
                 
                 word_width = blf.dimensions(0, wrd)[0]
-                if word_width >= useful_width:
+                if word_width >= useful_width and cur_line_len == 0: #a single word longer than working length
                     crp_wrd = crop_word(wrd, useful_width)
                         
                     if len(current_line):
-                        new_lines.append(' '.join(current_line))
-                    new_lines.append(crp_wrd)
+                        new_lines.append(' '.join(current_line) + ' ' + crp_wrd)
+                    else:
+                        new_lines.append(crp_wrd)
                     current_line = []
                     cur_line_len = 0
                     continue
